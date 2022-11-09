@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom'
 import AuthRoute from './components/AuthComponent'
 // import Layout from './pages/Layout'
