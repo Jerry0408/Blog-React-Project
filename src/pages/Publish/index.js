@@ -11,14 +11,14 @@ import {
   message
 } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
-import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import './index.scss'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { useStore } from '../../store'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useRef, useState } from 'react'
-import { values } from 'mobx'
+// import { values } from 'mobx'
 import { http } from '../../utils'
 
 
@@ -126,18 +126,18 @@ const Publish = () => {
           ref={form}
         >
           <Form.Item
-            label="标题"
+            label="Title"
             name="title"
-            rules={[{ required: true, message: '请输入文章标题' }]}
+            rules={[{ required: true, message: 'Please enter the title' }]}
           >
-            <Input placeholder="请输入文章标题" style={{ width: 400 }} />
+            <Input placeholder="Please enter the title" style={{ width: 400 }} />
           </Form.Item>
           <Form.Item
-            label="频道"
+            label="Channel"
             name="channel_id"
-            rules={[{ required: true, message: '请选择文章频道' }]}
+            rules={[{ required: true, message: 'Please Select a Channel' }]}
           >
-            <Select placeholder="请选择文章频道" style={{ width: 400 }}>
+            <Select placeholder="Please Select a Channel" style={{ width: 400 }}>
               {channelStore.channelList.map(item => (
                 <Option value={item.id} key={item.id}>{item.name}</Option>
               ))}
@@ -145,14 +145,14 @@ const Publish = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item label="封面">
+          <Form.Item label="Cover">
             <Form.Item name="type">
               <Radio.Group
                 onChange={radioChange}
               >
-                <Radio value={0}>无图</Radio>
-                <Radio value={1}>单图</Radio>
-                <Radio value={3}>三图</Radio>
+                <Radio value={0}>No cover</Radio>
+                <Radio value={1}>Single Cover</Radio>
+                <Radio value={3}>Multiple Covers</Radio>
 
               </Radio.Group>
             </Form.Item>
@@ -177,7 +177,7 @@ const Publish = () => {
 
           </Form.Item>
           <Form.Item
-            label="内容"
+            label="Content"
             name="content"
             rules={[{ required: true, message: '请输入文章内容' }]}
           >

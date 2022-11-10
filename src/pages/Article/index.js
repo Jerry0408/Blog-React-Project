@@ -3,7 +3,7 @@ import { Card, Breadcrumb, Form, Button, Radio, DatePicker, Select, Popconfirm }
 import { Table, Tag, Space } from 'antd'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 
-import img404 from '../../assets/error.png'
+import img404 from '../../assets/noimg.jpg'
 import './index.scss'
 import { useEffect, useState } from 'react'
 import { http } from '../../utils'
@@ -65,14 +65,12 @@ const Article = () => {
   useEffect(() => {
     const loadArticles = async () => {
       const res = await http.get('/mp/articles', { params })
+      console.log(res)
       const { results, total_count } = res.data.data
-      console.log(results, total_count)
       if (total_count !== 0 && results.length === 0) {
-        console.log(1111111)
         setParams({ ...params, page: params.page - 1 })
         return
       }
-      console.log(res)
       setArticles({
         list: results,
         count: total_count
@@ -84,41 +82,49 @@ const Article = () => {
 
   const columns = [
     {
-      title: '封面',
+      title: 'Cover',
       dataIndex: 'cover',
+      align: 'center',
       width: 120,
       render: cover => {
         return <img src={cover.images[0] || img404} width={200} height={150} alt="" />
       }
     },
     {
-      title: '标题',
+      title: 'Title',
       dataIndex: 'title',
+      align: 'center',
       width: 220
     },
     {
-      title: '状态',
+      title: 'Status',
       dataIndex: 'status',
-      render: data => <Tag color="green">审核通过</Tag>
+      align: 'center',
+      render: data => <Tag color="green">Published</Tag>
     },
     {
-      title: '发布时间',
+      title: 'Time Published',
+      align: 'center',
       dataIndex: 'pubdate'
     },
     {
-      title: '阅读数',
+      title: 'View Number',
+      align: 'center',
       dataIndex: 'read_count'
     },
     {
-      title: '评论数',
+      title: 'Comment Number',
+      align: 'center',
       dataIndex: 'comment_count'
     },
     {
-      title: '点赞数',
+      title: 'Likes',
+      align: 'center',
       dataIndex: 'like_count'
     },
     {
-      title: '操作',
+      title: 'Operate',
+      align: 'center',
       render: data => {
         return (
           <Space size="middle">
@@ -153,9 +159,9 @@ const Article = () => {
         title={
           <Breadcrumb separator=">">
             <Breadcrumb.Item>
-              <Link to="/layout/home">首页</Link>
+              <Link to="/layout/home">Home</Link>
             </Breadcrumb.Item>
-            <Breadcrumb.Item>内容管理</Breadcrumb.Item>
+            <Breadcrumb.Item>Content Management</Breadcrumb.Item>
           </Breadcrumb>
         }
         style={{ marginBottom: 20 }}
@@ -166,19 +172,19 @@ const Article = () => {
           }}
           onFinish={onSearch}
         >
-          <Form.Item label="状态" name="status">
+          <Form.Item label="Status" name="status">
             <Radio.Group>
-              <Radio value={-1}>全部</Radio>
-              <Radio value={0}>草稿</Radio>
-              <Radio value={1}>待审核</Radio>
-              <Radio value={2}>审核通过</Radio>
-              <Radio value={3}>审核失败</Radio>
+              <Radio value={-1}>All</Radio>
+              <Radio value={0}>Draft</Radio>
+              <Radio value={1}>Pending</Radio>
+              <Radio value={2}>Published</Radio>
+              <Radio value={3}>Denied</Radio>
             </Radio.Group>
           </Form.Item>
 
-          <Form.Item label="频道" name="channel_id">
+          <Form.Item label="Channel" name="channel_id">
             <Select
-              placeholder="请选择文章频道"
+              placeholder="Please Select Channel"
               style={{ width: 120 }}
             >
               {channelStore.channelList.map(channel => (
@@ -187,19 +193,19 @@ const Article = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item label="日期" name="date">
+          <Form.Item label="Date" name="date">
             {/* 传入locale属性 控制中文显示*/}
             <RangePicker></RangePicker>
           </Form.Item>
 
           <Form.Item>
             <Button type="primary" htmlType="submit" style={{ marginLeft: 80 }}>
-              筛选
+              Filter
             </Button>
           </Form.Item>
         </Form>
       </Card>
-      <Card title={`根据筛选条件共查询到 ${articles.count} 条结果：`}>
+      <Card title={`There are ${articles.count} articles in total that fit the requirement`}>
         <Table
           rowKey="id"
           columns={columns}

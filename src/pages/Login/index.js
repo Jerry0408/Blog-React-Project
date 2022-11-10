@@ -54,7 +54,7 @@ export default function Login () {
                 message: 'Please enter any phone number!',
               },
               {
-                pattern: /^(1?|(1\-)?)\d{10}$/,
+                pattern: /^(1?)\d{10}$/,
                 message: 'Please enter correct US phone number!',
                 validateTrigger: 'onBlur'
               }
