@@ -6,15 +6,15 @@ import { http } from '../../utils'
 import { useStore } from '../../store'
 
 export default function Home () {
-  // const params = {
-  //   page: 1,
-  //   per_page: 50
-  // }
-  // const { channelStore } = useStore()
-  // const [obj, setObj] = useState({})
-  // const [xData, setxData] = useState(["xx", 'YY'])
-  // const [yData, setyData] = useState([30, 20])
-  // const nameList = channelStore.nameList
+  const params = {
+    page: 1,
+    per_page: 50
+  }
+  const { channelStore } = useStore()
+  const [obj, setObj] = useState({})
+  const [xData, setxData] = useState(["xx", 'YY'])
+  const [yData, setyData] = useState([30, 20])
+  const nameList = channelStore.nameList
 
   // useEffect(() => {
   //   const channelIDobj = {}

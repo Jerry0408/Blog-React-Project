@@ -4,6 +4,7 @@
 
 import { http } from './http'
 import { setToken, getToken, removeToken } from './token'
+import { saveMoblie, getMoblie, removeMoblie } from './token'
 import { history } from './history'
 
 
@@ -17,5 +18,8 @@ export {
   setToken,
   getToken,
   removeToken,
+  saveMoblie,
+  getMoblie,
+  removeMoblie,
   history
 }

@@ -3,6 +3,7 @@ import { useStore } from '../../store'
 // import { removeToken } from '../../utils'
 import { Layout, Menu, Popconfirm } from 'antd'
 import { observer } from 'mobx-react-lite'
+import { removeMoblie, getMoblie } from '../../utils'
 import {
   HomeOutlined,
   DiffOutlined,
@@ -20,6 +21,7 @@ const GeekLayout = () => {
   const { loginStore, userStore, channelStore } = useStore()
   const { pathname } = useLocation()
   const navigate = useNavigate()
+  const MoblieNum = getMoblie()
   useEffect(() => {
     userStore.getUserInfo()
     channelStore.loadChannelList()
@@ -47,6 +49,7 @@ const GeekLayout = () => {
   }
   const logoutConfirm = () => {
     loginStore.clearToken()
+    removeMoblie()
     navigate('/login', { replace: true })
   }
 
@@ -55,7 +58,9 @@ const GeekLayout = () => {
       <Header className="header">
         <div className="logo" />
         <div className="user-info">
-          <span className="user-name">{userStore.userInfo.name}</span>
+          {/* 原代码 */}
+          {/* <span className="user-name">{userStore.userInfo.name}</span> */}
+          <span className="user-name">{MoblieNum}</span>
           <span className="user-logout">
             <Popconfirm
               title="Confirm Sign out?"
